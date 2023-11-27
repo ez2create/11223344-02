@@ -13,7 +13,12 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
-
+<div id="add_new_list">
+    <button  class="btn btn-primary align-items-center d-flex gap-2" data-bs-toggle="modal" data-bs-target="#addNewTask"
+        type="submit">
+        <i class="fas fa-plus"></i> Add New List
+    </button>
+</div>
 <body>
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
@@ -29,11 +34,47 @@
                         <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
                     </li>
                 </ul>
-                <button class="btn btn-primary align-items-center d-flex gap-2" type="submit"><i
-                        class="fas fa-plus"></i> Add New List</button>
+                <button class="btn btn-primary align-items-center d-flex gap-2" data-bs-toggle="modal" data-bs-target="#addNewTask"type="submit">
+                    <i class="fas fa-plus"></i> Add New List
+                </button>
             </div>
         </div>
     </nav>
+    <div class="modal fade" id="addNewTask" tabindex="-1" aria-labelledby="addNewTaskLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addNewTaskLabel">Add New Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="imageURL" class="form-label">Image URL</label>
+                            <input type="url" class="form-control" id="imageURL"
+                            placeholder="https://example.com/image.png">
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskTitle" class="form-label">Task Title</label>
+                            <input type="text" class="form-control" id="taskTitle" placeholder="Task title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskTag" class="form-label">Task Tag</label>
+                            <input type="text" class="form-control" id="taskTag" placeholder="Task tag" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDescrip" class="form-label">Task Description</label>
+                            <textarea type="text" class="form-control" id="taskDescrip" placeholder="Describe your task" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <section class="mt-4">
             <div class="row justify-content-center">
