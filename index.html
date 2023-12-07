@@ -15,7 +15,7 @@
 </head>
 
 
-<body>
+<body onload="loadInitialData()">
     <div id="add_new_list">
         <button class="btn btn-primary align-items-center d-flex gap-2" data-bs-toggle="modal"
             data-bs-target="#addNewTask" type="submit">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" onclick="handleSubmit()">Save</button>
                 </div>
             </div>
         </div>
