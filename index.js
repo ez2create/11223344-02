@@ -9,11 +9,11 @@ var htmlTaskContents = ({ id, title, type, url, description }) => `
 <div class="col-md-6 col-lg-4 mt-3" id=${id} key=${id}>
         <div class="card shadow-sm task_card">
             <div class="card-header d-flex justify-content-end task_card_header gap-1">
-                <button type="button" class="btn btn-outline-info mr-2" name=${id}>
-                    <i class="fas fa-pencil-alt"></i>
+                <button type="button" class="btn btn-outline-info mr-2" name=${id} onclick='editTask.apply(this, arguments)'>
+                    <i class="fas fa-pencil-alt" name=${id}></i>
                 </button>
-                <button type="button" class="btn btn-outline-danger mr-2" name="${id}" onclick= 'deleteTask.apply(this, arguments)'>
-                    <i class="fas fa-trash-alt"></i>
+                <button type="button" class="btn btn-outline-danger mr-2" name=${id} onclick='deleteTask.apply(this, arguments)'>
+                    <i class="fas fa-trash-alt" name=${id}></i>
                 </button>
             </div>
             <div class="card-body task_body">
@@ -97,5 +97,54 @@ var deleteTask = (e) => {
   var targetID = e.target.getAttribute("name");
   var type = e.target.tagName;
   var removeTask = state.taskLists.filter(({ id }) => id !== targetID);
-  console.log(removeTask);
+  // console.log(removeTask);
+
+  state.taskLists = removeTask;
+  updatelocalStorage();
+
+  if (type === "BUTTON") {
+    console.log(e.target.parentNode.parentNode.parentNode);
+    return e.target.parentNode.parentNode.parentNode.parentNode.removeChild(
+      e.target.parentNode.parentNode.parentNode
+    );
+  }
+  return e.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
+    e.target.parentNode.parentNode.parentNode.parentNode
+  );
+};
+
+var editTask = (e) => {
+  if (!e) e = window.event;
+  var targetID = e.target.getAttribute("name");
+  var type = e.target.tagName;
+
+  var parentNode;
+  var taskDescription;
+  var taskTitle;
+  var taskType;
+  var submitButton;
+
+  if (type === "BUTTON") {
+    parentNode = e.target.parentNode.parentNode;
+  } else {
+    parentNode = e.target.parentNode.parentNode.parentNode;
+  }
+  taskTitle = parentNode.childNodes[3].childNodes[3];
+  taskDescription = parentNode.childNodes[3].childNodes[5];
+  taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
+  submitButton = parentNode.childNodes[5].childNodes[1];
+  console.log(taskTitle, taskDescription, taskType, submitButton);
+  taskTitle.setAttribute("contenteditable", "true");
+  taskType.setAttribute("contenteditable", "true");
+  taskDescription.setAttribute("contenteditable", "true");
+  submitButton.setAttribute("onclick", "SaveEdit.apply(this, arguments)");
+  submitButton.removeAttribute("data-bs-target");
+  submitButton.removeAttribute("data-bs-toggle");
+  submitButton.innerHTML = "Save Changes";
+};
+var SaveEdit = (e) => {
+  if (!e) e = window.event;
+  var targetID = e.target.id;
+  var parentNode = e.target.parentNode.parentNode;
+  console.log(parentNode);
 };
