@@ -147,4 +147,40 @@ var SaveEdit = (e) => {
   var targetID = e.target.id;
   var parentNode = e.target.parentNode.parentNode;
   console.log(parentNode);
+
+  taskTitle = parentNode.childNodes[3].childNodes[3];
+  taskDescription = parentNode.childNodes[3].childNodes[5];
+  taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
+  submitButton = parentNode.childNodes[5].childNodes[1];
+  // console.log(taskTitle, taskDescription, taskType, submitButton);
+
+  var updateData = {
+    taskTitle: taskTitle.innerHTML,
+    taskDescription: taskDescription.innerHTML,
+    taskType: taskType.innerHTML,
+  };
+
+  var stateCopy = state.taskLists;
+  stateCopy = stateCopy.map((task) =>
+    task.id === targetID
+      ? {
+          id: task.id,
+          title: updateData.taskTitle,
+          description: updateData.taskDescription,
+          type: updateData.taskType,
+          url: task.url,
+        }
+      : task
+  );
+
+  state.taskLists = stateCopy;
+  updatelocalStorage();
+
+  taskTitle.setAttribute("contenteditable", "false");
+  taskType.setAttribute("contenteditable", "false");
+  taskDescription.setAttribute("contenteditable", "false");
+  submitButton.setAttribute("onclick", "openTask.apply(this, arguments)");
+  submitButton.setAttribute("data-bs-target", "#showTask");
+  submitButton.setAttribute("data-bs-toggle", "modal");
+  submitButton.innerHTML = "Open Task";
 };
