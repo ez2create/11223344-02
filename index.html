@@ -15,7 +15,7 @@
 </head>
 
 
-<body>
+<body onload="loadInitialData()">
     <div id="add_new_list">
         <button class="btn btn-primary align-items-center d-flex gap-2" data-bs-toggle="modal"
             data-bs-target="#addNewTask" type="submit">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" onclick="handleSubmit()">Save</button>
                 </div>
             </div>
         </div>
@@ -103,7 +103,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="input-group shadow-lg flex-nowrap">
-                        <input type="search" class="form-control" placeholder="Search Your Tasks Here...">
+                        <input type="search" class="form-control" placeholder="Search Your Tasks Here..."
+                            oninput="searchTask()">
                         <span class="input-group-text"><i class="fas fa-search"></i>
                         </span>
                     </div>
@@ -119,7 +120,7 @@
 
     <!-- dummy js notes -->
 
-    <div class="col-md-6 col-lg-4 mt-3" id=${id} key=${id}>
+    <!-- <div class="col-md-6 col-lg-4 mt-3" id=${id} key=${id}>
         <div class="card shadow-sm task_card">
             <div class="card-header d-flex justify-content-end task_card_header gap-1">
                 <button type="button" class="btn btn-outline-info mr-2" name=${id}>
@@ -146,7 +147,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
