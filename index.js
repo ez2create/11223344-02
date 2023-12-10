@@ -184,3 +184,15 @@ var SaveEdit = (e) => {
   submitButton.setAttribute("data-bs-toggle", "modal");
   submitButton.innerHTML = "Open Task";
 };
+
+var searchTask = (e)=> {
+  if (!e) e= window.event;
+  while(taskContents.firstChild){
+    taskContents.removeChild(taskContents.firstChild)
+  }
+  var resultDAta= state.taskLists.filter(({title})=> title.includes(e.target.value));
+  resultDAta.map((cardData)=> {
+    taskContents.insertAdjacentHTML("beforeend",htmlTaskContents(cardData));
+  })
+
+};
